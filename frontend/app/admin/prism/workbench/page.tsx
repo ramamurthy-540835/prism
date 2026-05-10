@@ -70,7 +70,7 @@ export default function WorkbenchPage() {
   const [optionsError, setOptionsError] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
-  const [quickOpen, setQuickOpen] = useState(false);
+  const [quickOpen, setQuickOpen] = useState(true);
   const [copied, setCopied] = useState(false);
 
   const [form, setForm] = useState({
@@ -467,9 +467,9 @@ export default function WorkbenchPage() {
             background: "#f8faff",
             padding: "24px"
           }}>
-            {!hasResult ? (
+            {!hasResult && WORKBENCH_EXAMPLES.length > 0 ? (
               <div style={cardStyle}>
-                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#161616", margin: "0 0 8px 0" }}>Try an Example</h3>
+                <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#161616", margin: "0 0 8px 0" }}>🚀 Try an Example</h3>
                 <p style={{ fontSize: "14px", color: "#525252", margin: "0 0 20px 0" }}>
                   Click any example to pre-fill the workbench and run instantly.
                 </p>
