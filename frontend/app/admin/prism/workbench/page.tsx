@@ -467,52 +467,58 @@ export default function WorkbenchPage() {
             background: "#f8faff",
             padding: "24px"
           }}>
-            {!hasResult && WORKBENCH_EXAMPLES.length > 0 ? (
+            {!hasResult ? (
               <div style={cardStyle}>
                 <h3 style={{ fontSize: "16px", fontWeight: 600, color: "#161616", margin: "0 0 8px 0" }}>🚀 Try an Example</h3>
                 <p style={{ fontSize: "14px", color: "#525252", margin: "0 0 20px 0" }}>
                   Click any example to pre-fill the workbench and run instantly.
                 </p>
-                <div style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: "12px"
-                }}>
-                  {WORKBENCH_EXAMPLES.slice(0, 8).map((ex, i) => {
-                    const Icon = iconMap[ex.icon] || Bot;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => applyExample(ex)}
-                        style={{
-                          padding: "14px",
-                          border: "1px solid #dcdcdc",
-                          borderRadius: "8px",
-                          background: "#ffffff",
-                          textAlign: "left",
-                          cursor: "pointer",
-                          transition: "all 0.2s"
-                        }}
-                        onMouseOver={(e) => {
-                          (e.currentTarget as any).style.borderColor = "#0f62fe";
-                          (e.currentTarget as any).style.background = "#f8faff";
-                        }}
-                        onMouseOut={(e) => {
-                          (e.currentTarget as any).style.borderColor = "#dcdcdc";
-                          (e.currentTarget as any).style.background = "#ffffff";
-                        }}
-                      >
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
-                          <Icon size={18} style={{ color: "#0f62fe" }} />
-                          <span style={{ fontWeight: 600, color: "#161616", fontSize: "13px" }}>{ex.label}</span>
-                        </div>
-                        <div style={{ fontSize: "12px", color: "#525252", lineHeight: "1.4" }}>
-                          {ex.userMessage.slice(0, 80)}...
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
+                {WORKBENCH_EXAMPLES && WORKBENCH_EXAMPLES.length > 0 ? (
+                  <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "12px"
+                  }}>
+                    {WORKBENCH_EXAMPLES.slice(0, 8).map((ex, i) => {
+                      const Icon = iconMap[ex.icon] || Bot;
+                      return (
+                        <button
+                          key={i}
+                          onClick={() => applyExample(ex)}
+                          style={{
+                            padding: "14px",
+                            border: "1px solid #dcdcdc",
+                            borderRadius: "8px",
+                            background: "#ffffff",
+                            textAlign: "left" as const,
+                            cursor: "pointer",
+                            transition: "all 0.2s"
+                          }}
+                          onMouseOver={(e) => {
+                            (e.currentTarget as any).style.borderColor = "#0f62fe";
+                            (e.currentTarget as any).style.background = "#f8faff";
+                          }}
+                          onMouseOut={(e) => {
+                            (e.currentTarget as any).style.borderColor = "#dcdcdc";
+                            (e.currentTarget as any).style.background = "#ffffff";
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px" }}>
+                            <Icon size={18} style={{ color: "#0f62fe" }} />
+                            <span style={{ fontWeight: 600, color: "#161616", fontSize: "13px" }}>{ex.label}</span>
+                          </div>
+                          <div style={{ fontSize: "12px", color: "#525252", lineHeight: "1.4" }}>
+                            {ex.userMessage.slice(0, 80)}...
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div style={{ padding: "20px", textAlign: "center", color: "#525252" }}>
+                    Loading examples...
+                  </div>
+                )}
               </div>
             ) : (
               <div>
