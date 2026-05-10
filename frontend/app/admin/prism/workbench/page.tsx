@@ -323,12 +323,13 @@ export default function WorkbenchPage() {
                     border: "none",
                     cursor: "pointer",
                     padding: 0,
-                    textDecoration: "underline"
+                    textDecoration: "underline",
+                    fontWeight: 600
                   }}
                 >
-                  {quickOpen ? "Hide" : "Show"} Quick Examples
+                  {quickOpen ? "▼" : "▶"} {quickOpen ? "Hide" : "Show"} Quick Examples ({WORKBENCH_EXAMPLES?.length || 0})
                 </button>
-                {quickOpen && (
+                {quickOpen && WORKBENCH_EXAMPLES && WORKBENCH_EXAMPLES.length > 0 && (
                   <div style={{ marginTop: "12px", display: "flex", flexWrap: "wrap", gap: "6px" }}>
                     {WORKBENCH_EXAMPLES.slice(0, 8).map((ex, i) => (
                       <button
@@ -337,12 +338,21 @@ export default function WorkbenchPage() {
                         style={{
                           padding: "6px 12px",
                           fontSize: "11px",
-                          border: "1px solid #dcdcdc",
+                          border: "1px solid #0f62fe",
                           borderRadius: "16px",
-                          background: "#ffffff",
-                          color: "#525252",
+                          background: "#f8faff",
+                          color: "#0f62fe",
                           cursor: "pointer",
-                          transition: "all 0.15s"
+                          transition: "all 0.15s",
+                          fontWeight: 500
+                        }}
+                        onMouseOver={(e) => {
+                          (e.currentTarget as any).style.background = "#0f62fe";
+                          (e.currentTarget as any).style.color = "#ffffff";
+                        }}
+                        onMouseOut={(e) => {
+                          (e.currentTarget as any).style.background = "#f8faff";
+                          (e.currentTarget as any).style.color = "#0f62fe";
                         }}
                       >
                         {ex.label.split(" - ")[0]}
