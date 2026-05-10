@@ -84,7 +84,7 @@ export default function WorkbenchPage() {
     systemPrompt: "",
     userMessage: "",
     maxTokens: 1024,
-    requestedModelId: ""
+    requestedModelId: "gemini-2.5-flash"
   });
 
   useEffect(() => {
@@ -151,10 +151,12 @@ export default function WorkbenchPage() {
       promptTypeId: ex.promptTypeId,
       userMessage: ex.userMessage,
       maxTokens: ex.maxTokens,
-      requestedModelId: ex.model,
+      requestedModelId: ex.model || "gemini-2.5-flash",
       systemPrompt: resolved || f.systemPrompt
     }));
-    leftRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    setTimeout(() => {
+      leftRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    }, 0);
   };
 
   const run = async () => {
@@ -369,10 +371,11 @@ export default function WorkbenchPage() {
               <div style={{ marginBottom: "20px" }}>
                 <label style={labelStyle}>Model</label>
                 <select
-                  value={form.requestedModelId}
+                  value={form.requestedModelId || "gemini-2.5-flash"}
                   onChange={(e) => setForm((f) => ({ ...f, requestedModelId: e.target.value }))}
                   style={commonInputStyle as any}
                 >
+                  <option value="gemini-2.5-flash">Gemini 2.5 Flash (default)</option>
                   <option value="">Auto (from routing rules)</option>
                   {filteredModels.map((m) => (
                     <option key={`${m.provider}:${m.modelId}`} value={m.modelId}>

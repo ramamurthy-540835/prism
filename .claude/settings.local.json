@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(Get-ChildItem -Recurse -Filter \"page.tsx\" \"C:\\\\Users\\\\VRamamurthy\\\\source\\\\PRISM\\\\frontend\\\\app\\\\admin\")",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(npm run *)",
+      "Bash(time curl -s http://localhost:3000/api/prism/options)",
+      "Bash(curl -s http://localhost:3000/api/prism/options)",
+      "Bash(git add *)",
+      "PowerShell(git ls-tree *)",
+      "PowerShell(git *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git push *)"
+    ]
+  }
+}
