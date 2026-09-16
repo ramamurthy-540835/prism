@@ -15,8 +15,14 @@ export async function GET() {
     return NextResponse.json({ status: "ok", project: env.projectId, dataset: env.dataset, tableCount });
   } catch (e) {
     return NextResponse.json(
-      { status: "error", message: String((e as any)?.message ?? e) },
-      { status: 500 }
+      {
+        status: "degraded",
+        project: env.projectId,
+        dataset: env.dataset,
+        message: "PRISM UI is running, but the configured BigQuery dataset is unavailable.",
+        error: String((e as any)?.message ?? e),
+      },
+      { status: 200 }
     );
   }
 }
