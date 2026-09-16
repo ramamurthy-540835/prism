@@ -13,9 +13,11 @@ export async function GET() {
   let bqTest = "NOT TESTED";
   try {
     const { BigQuery } = await import("@google-cloud/bigquery");
-    const bq = new BigQuery({ projectId: process.env.GOOGLE_CLOUD_PROJECT || "ctoteam" });
+    const projectId = process.env.GOOGLE_CLOUD_PROJECT || "aidirac-503309";
+    const dataset = process.env.BQ_DATASET || "prism";
+    const bq = new BigQuery({ projectId });
     const [rows] = await bq.query({
-      query: "SELECT COUNT(*) as cnt FROM `ctoteam.prism.prism_prompt_types`",
+      query: `SELECT COUNT(*) as cnt FROM \`${projectId}.${dataset}.prism_prompt_types\``,
       location: "US"
     });
     bqTest = "OK — prism_prompt_types has " + (rows[0] as any).cnt + " rows";

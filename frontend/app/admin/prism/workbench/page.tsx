@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
 import WorkbenchHeader from "@/components/workbench/WorkbenchHeader";
 import AppSidebar from "@/components/workbench/AppSidebar";
 import { WORKBENCH_EXAMPLES } from "@/lib/workbenchExamples";
@@ -63,7 +62,6 @@ const providerColor: Record<string, string> = {
 };
 
 export default function WorkbenchPage() {
-  const searchParams = useSearchParams();
   const leftRef = useRef<HTMLDivElement>(null);
 
   const [options, setOptions] = useState<Options>(EMPTY_OPTIONS);
@@ -88,7 +86,7 @@ export default function WorkbenchPage() {
   });
 
   useEffect(() => {
-    const personaFromUrl = searchParams.get("persona")?.trim();
+    const personaFromUrl = new URLSearchParams(window.location.search).get("persona")?.trim();
 
     // Set initial form with defaults immediately
     const selectedPersona = personaFromUrl && EMPTY_OPTIONS.personas.includes(personaFromUrl)
@@ -119,7 +117,7 @@ export default function WorkbenchPage() {
       .catch((e) => {
         setOptionsError(e instanceof Error ? e.message : "Failed to load options");
       });
-  }, [searchParams]);
+  }, []);
 
   const selectedPromptType = useMemo(
     () => options.promptTypes.find((pt) => pt.promptTypeId === form.promptTypeId),

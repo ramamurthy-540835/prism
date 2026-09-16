@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "next dev ./frontend -p 3000",
     "build": "next build ./frontend",
-    "start": "next start ./frontend -p 3000",
+    "start": "next start ./frontend",
     "backend:start": "node backend/server.js",
     "test:router": "node backend/scripts/test-prism-router.js"
   },

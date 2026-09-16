@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { queryBigQuery } from "@backend/lib/bigquery";
+import { env } from "@backend/lib/env";
 
 let _promptTypesCache: any = null;
 let _promptTypesCachedAt = 0;
@@ -13,7 +14,7 @@ export async function GET() {
   try {
     const rows = await queryBigQuery(`
       SELECT prompt_type_id, name, category, template, input_vars, description, where_to_apply, example, use_case
-      FROM \`ctoteam.prism.prism_prompt_types\`
+      FROM \`${env.projectId}.${env.dataset}.prism_prompt_types\`
       ORDER BY prompt_type_id
     `);
     _promptTypesCache = rows;

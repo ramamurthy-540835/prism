@@ -18,14 +18,20 @@ function requireEnv(name: string, allowEmpty = false): string {
   return value;
 }
 
+function envOrDefault(name: string, fallback: string): string {
+  const value = process.env[name];
+  return value && value.trim() ? value : fallback;
+}
+
 export const env: EnvConfig = {
-  projectId: requireEnv("GOOGLE_CLOUD_PROJECT"),
-  vertexLocation: requireEnv("VERTEX_AI_LOCATION"),
-  dataset: requireEnv("BQ_DATASET"),
-  usageTable: requireEnv("BQ_USAGE_TABLE"),
-  plansTable: requireEnv("BQ_PLANS_TABLE"),
-  budgetsTable: requireEnv("BQ_BUDGETS_TABLE"),
-  routingTable: requireEnv("BQ_ROUTING_TABLE"),
-  openaiApiKey: requireEnv("OPENAI_API_KEY", true),
-  anthropicApiKey: requireEnv("ANTHROPIC_API_KEY", true),
+  projectId: envOrDefault("GOOGLE_CLOUD_PROJECT", "aidirac-503309"),
+  vertexLocation: envOrDefault("VERTEX_AI_LOCATION", "us-central1"),
+  dataset: envOrDefault("BQ_DATASET", "prism"),
+  usageTable: envOrDefault("BQ_USAGE_TABLE", "prism_usage"),
+  plansTable: envOrDefault("BQ_PLANS_TABLE", "prism_plans"),
+  budgetsTable: envOrDefault("BQ_BUDGETS_TABLE", "prism_budgets"),
+  routingTable: envOrDefault("BQ_ROUTING_TABLE", "prism_model_routing"),
+  // Optional because Vertex AI is the default provider and uses runtime ADC.
+  openaiApiKey: envOrDefault("OPENAI_API_KEY", ""),
+  anthropicApiKey: envOrDefault("ANTHROPIC_API_KEY", ""),
 };

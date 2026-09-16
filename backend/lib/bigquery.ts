@@ -3,7 +3,7 @@ import { env } from "./env";
 
 let _bq: BigQuery | null = null;
 function getBigQuery() {
-  if (!_bq) _bq = new BigQuery({ projectId: process.env.BIGQUERY_PROJECT_ID ?? "ctoteam" });
+  if (!_bq) _bq = new BigQuery({ projectId: process.env.BIGQUERY_PROJECT_ID ?? env.projectId });
   return _bq;
 }
 export { getBigQuery as bigquery };
