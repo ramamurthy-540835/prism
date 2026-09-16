@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { queryBigQuery } from "@backend/lib/bigquery";
 import { env } from "@backend/lib/env";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await queryBigQuery(`SELECT 1 AS ok FROM \`${env.projectId}.${env.dataset}.${env.usageTable}\` LIMIT 1`);

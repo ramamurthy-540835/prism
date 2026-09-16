@@ -3,6 +3,8 @@ import { env } from "@backend/lib/env";
 import { queryBigQuery } from "@backend/lib/bigquery";
 import { getActiveColumn, activeWhereClause } from "@backend/lib/schema";
 
+export const dynamic = "force-dynamic";
+
 let _optionsCache: any = null;
 let _optionsCachedAt = 0;
 const OPTIONS_TTL = 5 * 60 * 1000;

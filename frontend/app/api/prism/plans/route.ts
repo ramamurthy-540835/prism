@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { env } from "@backend/lib/env";
+
+export const dynamic = "force-dynamic";
 import { queryBigQuery } from "@backend/lib/bigquery";
 
 let _plansCache: any = null;

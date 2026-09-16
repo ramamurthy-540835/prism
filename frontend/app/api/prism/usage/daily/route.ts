@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+
+export const dynamic = "force-dynamic";
 import { env } from "@backend/lib/env";
 import { queryBigQuery } from "@backend/lib/bigquery";
 
